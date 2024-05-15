@@ -3,28 +3,21 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 const server = require('http').createServer(app);
-
-
 const environment = process.env.NODE_ENV || "prod";
 
-
+// Set Server for Localhost
 let serverOrigin = "http://localhost:8080/";
 console.log(serverOrigin);
-
 
 //Initialize application with route
 app.use(express.static(path.join(__dirname, 'public')));
 
 // REST API
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 });
 
-
-
 //  WEB SOCKET PART
-
 const io = require('socket.io')(server, {
     cors: {
         origin: serverOrigin,
